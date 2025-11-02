@@ -1,58 +1,48 @@
 /* === RESET GENERAL === */
 body {
   font-family: "Poppins", sans-serif;
-  background-color: #f8f8f8; /* Fondo claro */
-  color: #000000; /* Texto negro */
+  background-color: #f8f9fa;
+  color: #333;
   margin: 0;
   padding: 0;
 }
 
 /* === NAVBAR === */
 .navbar {
-  background-color: #1b1b1b !important; /* Fondo oscuro */
+  background-color: #212529 !important;
   padding: 0.8rem 1.5rem;
-  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
 }
 
 .navbar-brand {
   font-weight: bold;
   font-size: 1.3rem;
-  color: #ffffff !important; /* Blanco */
+  color: #f8f9fa !important;
 }
 
 .navbar-nav .nav-link {
-  color: #ffffff !important;
+  color: #f8f9fa !important;
   font-weight: 500;
   transition: color 0.3s;
 }
 
 .navbar-nav .nav-link:hover {
-  color: #0d6efd !important; /* Azul Bootstrap */
-}
-
-.navbar .btn {
-  background-color: #0d6efd; /* Azul Bootstrap */
-  color: #ffffff;
-  border: none;
-  font-weight: 600;
-  border-radius: 6px;
-  padding: 8px 18px;
-  transition: all 0.3s;
-}
-
-.navbar .btn:hover {
-  background-color: #0b5ed7; /* Azul más oscuro */
-  color: #ffffff;
+  color: #0d6efd !important;
 }
 
 /* === HERO === */
 .hero {
-  background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0,0,0,0.3)), 
-              url('../img/hero-bg.jpg') center/cover no-repeat;
-  color: #ffffff;
+  background: url('../img/hero-bg.jpg') center/cover no-repeat;
+  color: white;
   text-align: center;
   padding: 140px 20px;
   position: relative;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
 }
 
 .hero-content {
@@ -64,27 +54,16 @@ body {
   font-size: 3rem;
   font-weight: 700;
   margin-bottom: 20px;
-  color: #ffffff; /* Blanco sobre imagen */
 }
 
 .hero p {
   font-size: 1.2rem;
   margin-bottom: 30px;
-  color: #f1f1f1;
 }
 
 .hero .btn {
   padding: 12px 30px;
   font-size: 1.1rem;
-  background-color: #0d6efd; /* Azul Bootstrap */
-  border: none;
-  color: #ffffff;
-  border-radius: 6px;
-  transition: all 0.3s;
-}
-
-.hero .btn:hover {
-  background-color: #0b5ed7;
 }
 
 /* === SECCIÓN DE SERVICIOS === */
@@ -92,49 +71,33 @@ body {
   text-align: center;
   margin: 60px 0 40px;
   font-weight: 600;
-  color: #000000; /* Negro */
 }
 
 .card {
   border: none;
   box-shadow: 0 4px 10px rgba(0,0,0,0.1);
   border-radius: 12px;
-  background-color: #ffffff;
   transition: transform 0.3s, box-shadow 0.3s;
 }
 
 .card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 6px 15px rgba(13,110,253,0.2); /* Sombra azul */
+  box-shadow: 0 6px 15px rgba(0,0,0,0.15);
 }
 
 .card-title {
   font-weight: 600;
-  color: #000000;
+  color: #212529;
 }
 
 .card-text {
-  color: #000000;
-}
-
-.card .btn {
-  background-color: #0d6efd; /* Azul Bootstrap */
-  color: #ffffff;
-  border: none;
-  font-weight: 600;
-  border-radius: 6px;
-  padding: 8px 18px;
-  transition: all 0.3s;
-}
-
-.card .btn:hover {
-  background-color: #0b5ed7;
+  color: #555;
 }
 
 /* === FOOTER === */
 footer {
-  background-color: #1b1b1b;
-  color: #ffffff;
+  background-color: #212529;
+  color: #f8f9fa;
   text-align: center;
   padding: 25px 0;
   margin-top: 60px;
@@ -147,7 +110,6 @@ footer a {
 
 footer a:hover {
   text-decoration: underline;
-  color: #5ca1ff;
 }
 
 /* === RESPONSIVE === */
