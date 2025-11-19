@@ -4,11 +4,12 @@ import AOS from 'aos';
 import 'aos/dist/aos.css';
 import fullpage from 'fullpage.js';
 import 'fullpage.js/dist/fullpage.min.css';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-inicio',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule],
   templateUrl: './inicio.component.html',
   styleUrls: ['./inicio.component.css']
 })
