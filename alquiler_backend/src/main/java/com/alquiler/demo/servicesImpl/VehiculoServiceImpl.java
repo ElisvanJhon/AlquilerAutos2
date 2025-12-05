@@ -49,13 +49,13 @@ public class VehiculoServiceImpl implements VehiculoService {
 
 	@Override
 	public List<Vehiculo> buscarPorMarca(String marca) {
-		// TODO Auto-generated method stub
+		
 		return vehiculoRepository.findByMarcaIgnoreCase(marca);
 	}
 
 	@Override
 	public List<Vehiculo> buscarPorAnio(Integer anio) {
-		// TODO Auto-generated method stub
+		
 		return vehiculoRepository.findByAnio(anio);
 	}
 }

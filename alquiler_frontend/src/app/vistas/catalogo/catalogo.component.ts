@@ -37,6 +37,11 @@ export class CatalogoComponent implements OnInit {
     this.catalogoService.getVehiculos().subscribe(
       (data: Catalogo[]) => {
         this.catalogos = data;
+
+        this.marcas = [...new Set(data.map(v => v.marca))];
+
+        // Llenar años únicos para el select, ordenados de mayor a menor
+        this.anios = [...new Set(data.map(v => v.anio))].sort((a, b) => b - a);
       },
       (error) => {
         console.error('Error al obtener el catálogo:', error);
