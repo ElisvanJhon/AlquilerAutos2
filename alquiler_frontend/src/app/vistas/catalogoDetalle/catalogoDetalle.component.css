@@ -1,3 +1,27 @@
-body {
-  padding-top: 70px; /* evita que el navbar tape contenido */
+.card {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.card-img-top {
+  width: 100%;
+  height: 180px;     /* Altura fija para uniformidad */
+  object-fit: cover; /* Ajusta sin deformar */
+}
+
+.card-body {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.card-title {
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.btn-sm {
+  width: 100%;
 }

@@ -15,28 +15,38 @@ import { CommonModule } from '@angular/common';
 export class CatalogoDetalleComponent implements OnInit {
 
   vehiculo: any;
-  loading = true;
-  error = false;
+  similares: any[] = [];
 
   constructor(
     private route: ActivatedRoute,
     private catalogoService: CatalogoService
   ) {}
 
-  ngOnInit(): void {
-    const id = this.route.snapshot.paramMap.get('id');
+ngOnInit(): void {
+
+  this.route.paramMap.subscribe(params => {
+    const id = params.get('id');
 
     if (id) {
-      this.catalogoService.getVehiculoPorId(id).subscribe({
-        next: data => {
-          this.vehiculo = data;
-          this.loading = false;
-        },
-        error: err => {
-          this.error = true;
-          this.loading = false;
-        }
+      this.catalogoService.getVehiculoPorId(id).subscribe(data => {
+        this.vehiculo = data;
+
+        // Cargar vehículos similares al cambiar de ID
+        this.cargarSimilares(data.marca, data.idVehiculo);
       });
     }
+
+  });
+
+}
+
+
+  cargarSimilares(marca: string, idActual: number): void {
+    this.catalogoService.getVehiculosPorMarca(marca).subscribe(lista => {
+      this.similares = lista
+        .filter(v => v.idVehiculo !== idActual) // excluye el vehículo actual
+        .slice(0, 4); // muestra máximo 4
+    });
   }
+
 }
