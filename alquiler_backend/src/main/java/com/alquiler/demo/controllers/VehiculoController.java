@@ -6,8 +6,6 @@ import java.util.List;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -26,10 +24,10 @@ public class VehiculoController {
 		this.vehiculoService = vehiculoService;
 	}
 
-	@PostMapping
-	public Vehiculo save(@RequestBody Vehiculo vehiculo) {
-		return vehiculoService.save(vehiculo);
-	}
+	//@PostMapping
+	//public Vehiculo save(@RequestBody Vehiculo vehiculo) {
+		//return vehiculoService.save(vehiculo);
+	//}
 	
 	@GetMapping
 	public List<Vehiculo> findAll(){
@@ -46,5 +44,11 @@ public class VehiculoController {
     public List<Vehiculo> buscarPorAnio(@PathVariable Integer anio) {
         return vehiculoService.buscarPorAnio(anio);
     }
+    
+    @GetMapping("/tipo/{tipoVehiculo}")
+    public List<Vehiculo> buscarPorTipoVehiculo(@PathVariable String tipoVehiculo) {
+        return vehiculoService.buscarPorTipo(tipoVehiculo);
+    }
+    
     
 }

@@ -13,7 +13,9 @@ export class Catalogo {
     public tipoVehiculo: string,
     public kilometrajeActual: number,
     public sucursal: any,        
-    public imagen: string        
+    public imagen: string,
+    public combustible: string,
+    public transmision: string        
   ) {}
 
 }

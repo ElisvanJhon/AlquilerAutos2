@@ -35,6 +35,15 @@
         </select>
       </div>
 
+       <!-- Tipo -->
+      <div class="col-md-2">
+        <label class="form-label fw-bold">Tipo</label>
+        <select class="form-select" [(ngModel)]="filtro.tipoVehiculo" name="tipoVehiculo">
+          <option value="">Todos</option>
+          <option *ngFor="let t of tipos" [value]="t">{{ t }}</option>
+        </select>
+      </div>
+
       <!-- Año -->
       <div class="col-md-2">
         <label class="form-label fw-bold">Año</label>
@@ -43,6 +52,8 @@
           <option *ngFor="let a of anios" [value]="a">{{ a }}</option>
         </select>
       </div>
+
+     
 
       <!-- Precio máximo -->
   <div class="col-md-3">
@@ -81,9 +92,8 @@
           <p class="card-text">Precio por día: S/ {{ vehiculo.precioDiario }}</p>
         </div>
 
-        <div class="card-footer text-center bg-white">
+        <div class="card-footer text-end bg-white">
           <button class="btn btn-primary btn-sm" (click)="verDetalles(vehiculo)">Ver detalles</button>
-          <button class="btn btn-success btn-sm" (click)="reservar(vehiculo)">Reservar</button>
         </div>
 
       </div>

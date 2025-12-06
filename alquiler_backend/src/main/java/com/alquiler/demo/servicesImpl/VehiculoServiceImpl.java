@@ -28,25 +28,6 @@ public class VehiculoServiceImpl implements VehiculoService {
         return vehiculoRepository.findById(id);
     }
 
-    @Override
-    public Vehiculo save(Vehiculo vehiculo) {
-        return vehiculoRepository.save(vehiculo);
-    }
-
-    @Override
-    public Vehiculo update(Integer id, Vehiculo vehiculo) {
-        if (vehiculoRepository.existsById(id)) {
-            vehiculo.setIdVehiculo(id);
-            return vehiculoRepository.save(vehiculo);
-        }
-        return null;
-    }
-
-    @Override
-    public void delete(Integer id) {
-        vehiculoRepository.deleteById(id);
-    }
-
 	@Override
 	public List<Vehiculo> buscarPorMarca(String marca) {
 		
@@ -57,5 +38,11 @@ public class VehiculoServiceImpl implements VehiculoService {
 	public List<Vehiculo> buscarPorAnio(Integer anio) {
 		
 		return vehiculoRepository.findByAnio(anio);
+	}
+
+	@Override
+	public List<Vehiculo> buscarPorTipo(String tipoVehiculo) {
+
+		return vehiculoRepository.findByTipoVehiculo(tipoVehiculo);
 	}
 }

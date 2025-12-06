@@ -15,6 +15,8 @@ public interface VehiculoRepository extends JpaRepository<Vehiculo, Integer> {
 
     // 🔹 Buscar vehículos por año
     List<Vehiculo> findByAnio(Integer anio);
+    
+    List<Vehiculo> findByTipoVehiculo(String tipoVehiculo);
 
 
    

@@ -33,6 +33,8 @@ public class Vehiculo {
     private String estado;
     private Integer asientos;
     private double precioDiario;
+    private String combustible;
+    private String transmision;
 
     @Column(name = "tipo_vehiculo")
     private String tipoVehiculo;
@@ -58,10 +60,27 @@ public class Vehiculo {
 
     // Getters y setters
     
+    
     public String getImagen() 
     { return imagen; }
     
-    public void setImagen(String imagen) 
+    public String getCombustible() {
+		return combustible;
+	}
+
+	public void setCombustible(String combustible) {
+		this.combustible = combustible;
+	}
+
+	public String getTransmision() {
+		return transmision;
+	}
+
+	public void setTransmision(String transmision) {
+		this.transmision = transmision;
+	}
+
+	public void setImagen(String imagen) 
     { this.imagen = imagen; }
 
 	public Integer getIdVehiculo() {

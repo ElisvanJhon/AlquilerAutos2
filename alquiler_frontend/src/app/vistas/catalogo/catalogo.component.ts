@@ -19,14 +19,17 @@ export class CatalogoComponent implements OnInit {
   catalogos : Catalogo []=[];
   marcaFiltro: string = "";
   anioFiltro: number | null = null;
+  tipoFiltro: string = "";
   marcas: string[] = [];
   anios: number[] = [];
   errorMsg: string = '';
+  tipos: string[] = [];
 
   filtro = {
   marca: "",
   anio: "",
-  precioMax: ''
+  precioMax: '',
+  tipoVehiculo: ""
 };
 
   constructor(private catalogoService:CatalogoService) { }
@@ -44,6 +47,8 @@ export class CatalogoComponent implements OnInit {
 
         // Llenar años únicos para el select, ordenados de mayor a menor
         this.anios = [...new Set(data.map(v => v.anio))].sort((a, b) => b - a);
+
+        this.tipos = [...new Set(data.map(v => v.tipoVehiculo))];
       },
       (error) => {
         console.error('Error al obtener el catálogo:', error);
@@ -54,7 +59,7 @@ export class CatalogoComponent implements OnInit {
 
 filtrar() {
   // Si no hay filtros → listar todo
-  if (!this.filtro.marca && !this.filtro.anio && !this.filtro.precioMax) {
+  if (!this.filtro.marca && !this.filtro.anio && !this.filtro.precioMax && !this.filtro.tipoVehiculo) {
     this.listarCatalogo();
     return;
   }
@@ -74,7 +79,13 @@ filtrar() {
         resultado = resultado.filter(v => v.anio === Number(this.filtro.anio));
       }
 
-      // Filtrar por precio máximo
+      // Filtrar por tipo de vehículo
+      if (this.filtro.tipoVehiculo) {
+        resultado = resultado.filter(v => v.tipoVehiculo === this.filtro.tipoVehiculo);
+      }
+
+
+        // Filtrar por precio máximo
       if (this.filtro.precioMax) {
         resultado = resultado.filter(v => v.precioDiario <= Number(this.filtro.precioMax));
       }
@@ -95,7 +106,8 @@ limpiar() {
   this.filtro = {
     marca: "",
     anio: "",
-    precioMax: ''
+    precioMax: '',
+    tipoVehiculo: ""
   };
 
   this.errorMsg = '';
@@ -108,8 +120,4 @@ verDetalles(vehiculo: Catalogo) {
     // this.router.navigate(['/catalogo', vehiculo.id]);
   }
 
-  reservar(vehiculo: Catalogo) {
-    console.log("Reservando vehículo:", vehiculo);
-    // Aquí normalmente abres un modal o navegas a la reserva
-  }
 }

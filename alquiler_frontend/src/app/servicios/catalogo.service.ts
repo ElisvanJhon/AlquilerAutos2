@@ -30,5 +30,8 @@ export class CatalogoService {
   return this.http.get<Catalogo[]>(`${this.apiUrl}/anio/${anio}`);
 }
 
-  
+getVehiculosPorTipo(tipoVehiculo: string): Observable<Catalogo[]> {
+  return this.http.get<Catalogo[]>(`${this.apiUrl}/tipo/${tipoVehiculo}`);
+
+  }
 }
