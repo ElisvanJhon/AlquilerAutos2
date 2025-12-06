@@ -16,16 +16,19 @@ import { RegistroComponent } from './vistas/registro/registro.component';
 import { VehiculoDetalleComponent } from './vistas/admin/vehiculos/vehiculo-detalle/vehiculo-detalle.component';
 import { VehiculoFormComponent } from './vistas/admin/vehiculos/vehiculo-form/vehiculo-form.component';
 import { VehiculoListarComponent } from './vistas/admin/vehiculos/vehiculo-listar/vehiculo-listar.component';
+import { CatalogoDetalleComponent } from './vistas/catalogoDetalle/catalogoDetalle.component';
 
 
 export const routes: Routes = [
-  // 🌐 Público: landing + vistas independientes
+  
   { path: '', component: InicioComponent },
   { path: 'catalogo', component: CatalogoComponent },
   { path: 'perfil', component: PerfilComponent },
   { path: 'reserva', component: ReservaComponent },
-  { path: 'login', component: LoginComponent }, // 👈 Aquí va
+  { path: 'login', component: LoginComponent }, 
+  { path: 'catalogo/:id', component: CatalogoDetalleComponent }, 
 
+  
   // 🛠️ Dashboard (protegido)
   {
     path: 'dashboard',

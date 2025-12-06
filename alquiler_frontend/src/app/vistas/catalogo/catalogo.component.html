@@ -20,6 +20,7 @@
 
 <!-- CATÁLOGO -->
 <div class="container my-5">
+  
   <h2 class="text-center mb-4">Catálogo de Vehículos</h2>
 
   <!-- 🔍 FILTROS -->
@@ -93,8 +94,13 @@
         </div>
 
         <div class="card-footer text-end bg-white">
-          <button class="btn btn-primary btn-sm" (click)="verDetalles(vehiculo)">Ver detalles</button>
-        </div>
+          <button 
+          class="btn btn-primary btn-sm"
+          [routerLink]="['/catalogo', vehiculo.idVehiculo]">
+          Ver detalles
+        </button>
+      </div> 
+
 
       </div>
     </div>

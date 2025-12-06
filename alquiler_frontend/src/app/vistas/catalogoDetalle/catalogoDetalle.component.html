@@ -1,0 +1,75 @@
+<div class="container mt-5">
+
+  <!-- BOTÓN VOLVER -->
+  <button class="btn btn-secondary mb-3" routerLink="/catalogo">
+    <i class="fa-solid fa-arrow-left"></i> Volver
+  </button>
+
+  <!-- CARD DE DETALLES -->
+  <div class="card shadow-lg p-4">
+
+    <h2 class="mb-4 text-center">Detalles del Vehículo</h2>
+
+    <div class="row">
+
+      <!-- IMAGEN DEL VEHÍCULO -->
+      <div class="col-md-5 text-center">
+        <img 
+          [src]="vehiculo.imagen" 
+          alt="Vehículo" 
+          class="img-fluid rounded border"
+        >
+      </div>
+
+      <!-- INFORMACIÓN -->
+      <div class="col-md-7">
+
+        <ul class="list-group list-group-flush fs-5">
+
+          <li class="list-group-item">
+            <i class="fa-solid fa-car-side text-primary"></i>
+            <strong> Marca:</strong> {{ vehiculo.marca }}
+          </li>
+
+          <li class="list-group-item">
+            <i class="fa-solid fa-tag text-primary"></i>
+            <strong> Modelo:</strong> {{ vehiculo.modelo }}
+          </li>
+
+          <li class="list-group-item">
+            <i class="fa-solid fa-calendar text-primary"></i>
+            <strong> Año:</strong> {{ vehiculo.anio }}
+          </li>
+
+          <li class="list-group-item">
+            <i class="fa-solid fa-dollar-sign text-primary"></i>
+            <strong> Precio diario:</strong> S/. {{ vehiculo.precioDiario }}
+          </li>
+
+          <li class="list-group-item">
+            <i class="fa-solid fa-users text-primary"></i>
+            <strong> Asientos:</strong> {{ vehiculo.asientos }}
+          </li>
+
+          <li class="list-group-item">
+            <i class="fa-solid fa-car text-primary"></i>
+            <strong> Tipo vehículo:</strong> {{ vehiculo.tipoVehiculo }}
+          </li>
+
+          <li class="list-group-item">
+            <i class="fa-solid fa-gears text-primary"></i>
+            <strong> Transmisión:</strong> {{ vehiculo.transmision }}
+          </li>
+
+          <li class="list-group-item">
+            <i class="fa-solid fa-gas-pump text-primary"></i>
+            <strong> Combustible:</strong> {{ vehiculo.combustible }}
+          </li>
+
+        </ul>
+
+      </div>
+    </div>
+  </div>
+
+</div>

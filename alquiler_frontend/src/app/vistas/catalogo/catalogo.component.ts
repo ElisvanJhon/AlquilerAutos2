@@ -1,16 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
 import { Catalogo } from '../../clases/catalogo';
 import { CatalogoService } from '../../servicios/catalogo.service';
+import { RouterLink } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 
 
 @Component({
   selector: 'app-catalogo',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterModule],
+  imports: [FormsModule, RouterLink, CommonModule],
   templateUrl: './catalogo.component.html',
   styleUrls: ['./catalogo.component.css']
 })
@@ -114,10 +114,6 @@ limpiar() {
 
   this.listarCatalogo(); // recarga el catálogo completo
 }
-verDetalles(vehiculo: Catalogo) {
-    console.log("Detalles del vehículo:", vehiculo);
-    // Si tienes ruta → navegar:
-    // this.router.navigate(['/catalogo', vehiculo.id]);
-  }
+
 
 }
