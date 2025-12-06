@@ -1,75 +1,137 @@
-<div class="container my-5">
-  <div class="card shadow-sm mx-auto reserva-card">
-    <div class="card-header bg-primary text-white text-center">
-      <h4>Reservar Vehículo</h4>
+<div class="container" style="margin-top: 180px; max-width: 700px;">
+
+  <button class="btn btn-secondary mb-3" routerLink="/catalogo">
+    <i class="fa-solid fa-arrow-left"></i> Volver
+  </button>
+
+  <h2 class="mb-3">Reserva de Vehículo</h2>
+  <hr>
+
+  <!-- Datos del vehículo -->
+  <div class="card mb-4 shadow-sm">
+    <div class="row g-0">
+      <div class="col-md-4">
+        <img [src]="vehiculo?.imagen" class="img-fluid rounded-start" style="height: 100%; object-fit: cover;">
+      </div>
+      <div class="col-md-8">
+        <div class="card-body">
+          <h5 class="card-title">{{ vehiculo?.marca }} {{ vehiculo?.modelo }}</h5>
+          <p class="card-text">S/ {{ vehiculo?.precioDiario }} por día</p>
+        </div>
+      </div>
     </div>
-    <div class="card-body">
-      <form (ngSubmit)="reservarVehiculo()" #reservaForm="ngForm">
+  </div>
 
-        <!-- Selección de vehículo -->
-        <div class="mb-3">
-          <label for="vehiculo" class="form-label">Selecciona un vehículo</label>
-          <select id="vehiculo" class="form-select" required
-                  [(ngModel)]="reserva.vehiculoId" name="vehiculoId">
-            <option value="" disabled selected>-- Seleccione --</option>
-            <option *ngFor="let vehiculo of vehiculos" [value]="vehiculo.id">
-              {{ vehiculo.marca }} {{ vehiculo.modelo }}
-            </option>
-          </select>
-        </div>
+ <!-- Formulario -->
+  <form (ngSubmit)="crearReserva()">
 
-        <!-- Fechas de reserva -->
-        <div class="row g-3">
-          <div class="col-md-6">
-            <label for="fechaInicio" class="form-label">Fecha de inicio</label>
-            <input type="date" id="fechaInicio" class="form-control" required
-                   [(ngModel)]="reserva.fechaInicio" name="fechaInicio">
-          </div>
-          <div class="col-md-6">
-            <label for="fechaFin" class="form-label">Fecha de fin</label>
-            <input type="date" id="fechaFin" class="form-control" required
-                   [(ngModel)]="reserva.fechaFin" name="fechaFin">
-          </div>
-        </div>
+    <div class="mb-3">
+      <label class="form-label"><i class="fa-solid fa-calendar-day"></i> Fecha inicio</label>
+      <input
+        type="date"
+        class="form-control"
+        [(ngModel)]="fechaInicio"
+        name="fechaInicio"
+        (change)="calcularCosto()"
+        required>
+    </div>
 
-        <!-- Kilometraje inicial -->
-        <div class="mb-3 mt-3">
-          <label for="kilometraje" class="form-label">Kilometraje inicial</label>
-          <input type="number" id="kilometraje" class="form-control"
-                 placeholder="Ej: 12000" required
-                 [(ngModel)]="reserva.kilometraje" name="kilometraje" min="0">
-        </div>
+    <div class="mb-3">
+      <label class="form-label"><i class="fa-solid fa-calendar-check"></i> Fecha fin</label>
+      <input
+        type="date"
+        class="form-control"
+        [(ngModel)]="fechaFin"
+        name="fechaFin"
+        (change)="calcularCosto()"
+        required>
+    </div>
 
-        <!-- Seguro adicional -->
-        <div class="mb-3">
-          <label for="seguro" class="form-label">Seguro adicional</label>
-          <select id="seguro" class="form-select"
-                  [(ngModel)]="reserva.seguro" name="seguro">
-            <option value="ninguno">Ninguno</option>
-            <option value="basico">Básico</option>
-            <option value="completo">Completo</option>
-          </select>
-        </div>
+    <!-- Validación de fechas -->
+    <div *ngIf="errorFecha" class="alert alert-danger">
+      <i class="fa-solid fa-circle-exclamation"></i>
+      La fecha de fin debe ser posterior a la fecha de inicio.
+    </div>
 
-        <!-- Información adicional -->
-        <div class="mb-3">
-          <label for="comentarios" class="form-label">Comentarios / Instrucciones especiales</label>
-          <textarea id="comentarios" class="form-control" rows="3"
-                    [(ngModel)]="reserva.comentarios" name="comentarios"
-                    placeholder="Por ejemplo: necesito silla para niño, GPS, etc."></textarea>
-        </div>
+    <!-- Método de entrega -->
+    <div class="mb-3">
+      <label class="form-label"><i class="fa-solid fa-car-side"></i> Método de entrega</label>
 
-        <!-- Botones -->
-        <div class="d-flex justify-content-between mt-4">
-          <button type="button" class="btn btn-secondary" (click)="cancelarReserva()">
-            Cancelar / Volver
-          </button>
-          <button type="submit" class="btn btn-success" [disabled]="reservaForm.invalid">
-            Reservar Vehículo
-          </button>
-        </div>
+      <select class="form-select" [(ngModel)]="metodoEntrega" name="metodoEntrega">
+        <option value="tienda">Recojo en tienda</option>
+        <option value="domicilio">Entrega a domicilio</option>
+      </select>
+    </div>
 
-      </form>
+    <!-- Dirección (solo si domicilio) -->
+    <div class="mb-3" *ngIf="metodoEntrega === 'domicilio'">
+      <label class="form-label"><i class="fa-solid fa-location-dot"></i> Dirección de entrega</label>
+      <input type="text" class="form-control" [(ngModel)]="direccion" name="direccion">
+    </div>
+
+   <!-- Resumen Completo -->
+<div *ngIf="costoTotal !== null && !errorFecha" class="alert alert-info mt-3">
+
+  <h5 class="mb-3">
+    <i class="fa-solid fa-receipt"></i> Resumen de la reserva
+  </h5>
+
+  <p><strong>Vehículo:</strong> {{ vehiculo?.marca }} {{ vehiculo?.modelo }}</p>
+
+  <p><strong>Fecha de inicio:</strong> {{ fechaInicio }}</p>
+  <p><strong>Fecha de fin:</strong> {{ fechaFin }}</p>
+
+  <hr>
+
+  <p><strong>Días alquilados:</strong> {{ dias }}</p>
+  <p><strong>Precio por día:</strong> S/ {{ vehiculo?.precioDiario }}</p>
+
+  <p *ngIf="metodoEntrega === 'tienda'">
+    <strong>Entrega:</strong> Recojo en tienda
+  </p>
+
+  <p *ngIf="metodoEntrega === 'envio'">
+    <strong>Entrega:</strong> Envío a domicilio  
+    <br><strong>Dirección:</strong> {{ direccion }}
+  </p>
+
+  <hr>
+
+  <h5 class="fw-bold">
+    Total a pagar: S/ {{ costoTotal }}
+  </h5>
+
+</div>
+
+
+    <!-- BOTÓN confirma modal -->
+  <button 
+  type="button"
+  class="btn btn-success w-100"
+  [disabled]="errorFecha"
+  (click)="confirmarReserva()">
+
+  <i class="fa-solid fa-check-circle"></i> Confirmar Reserva
+  </button>
+
+  </form>
+
+
+  <!-- MODAL ÉXITO -->
+<div class="modal fade" id="successModal" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content text-center p-4 shadow-lg border-0">
+
+      <div class="modal-body">
+        <i class="fa-solid fa-circle-check text-success" style="font-size: 60px;"></i>
+        <h3 class="mt-3">¡Reserva realizada!</h3>
+        <p>Tu reserva se registró correctamente.</p>
+
+        <button class="btn btn-primary w-100 mt-3" (click)="cerrarYVolver()">
+          Aceptar
+        </button>
+      </div>
+
     </div>
   </div>
 </div>

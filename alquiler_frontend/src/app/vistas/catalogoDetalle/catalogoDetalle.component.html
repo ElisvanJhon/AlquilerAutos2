@@ -91,6 +91,7 @@
 
     <button 
         class="btn btn-success mt-3"
+        *ngIf="vehiculo"
         [routerLink]="['/reserva', vehiculo.idVehiculo]">
         <i class="fa-solid fa-calendar-check"></i> Hacer reserva
     </button>

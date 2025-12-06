@@ -1,7 +1,19 @@
 package com.alquiler.demo.entities;
 
-import jakarta.persistence.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+
+import org.hibernate.annotations.CreationTimestamp;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -16,14 +28,18 @@ public class Reserva {
     @Column(name = "id_reserva")
     private Integer idReserva;
 
-    @Column(name = "fecha_reserva")
-    private LocalDate fechaReserva;
+    @CreationTimestamp
+    @Column(name = "fecha_reserva", updatable = false)
+    private LocalDateTime fechaReserva;
 
     @Column(name = "fecha_inicio")
     private LocalDate fechaInicio;
 
     @Column(name = "fecha_fin")
     private LocalDate fechaFin;
+    
+    @Column(name = "costo_estimado")
+    private Double costoEstimado;
 
     private String estado;
 

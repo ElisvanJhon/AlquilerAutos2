@@ -24,7 +24,7 @@ export const routes: Routes = [
   { path: '', component: InicioComponent },
   { path: 'catalogo', component: CatalogoComponent },
   { path: 'perfil', component: PerfilComponent },
-  { path: 'reserva', component: ReservaComponent },
+  { path: 'reserva/:id', component: ReservaComponent },
   { path: 'login', component: LoginComponent }, 
   { path: 'catalogo/:id', component: CatalogoDetalleComponent }, 
 
